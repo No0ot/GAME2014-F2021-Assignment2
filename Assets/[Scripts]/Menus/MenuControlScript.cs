@@ -10,6 +10,16 @@ public class MenuControlScript : MonoBehaviour
         SceneManager.LoadScene("GameplayScene");
     }
 
+    public void TempButton()
+    {
+        SceneManager.LoadScene("EndScene");
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void QuitButtonPressed()
     {
         Application.Quit();
