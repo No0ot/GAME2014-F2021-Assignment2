@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         // Keyboard Input
         float x = (Input.GetAxisRaw("Horizontal") + joystick.Horizontal);
         float y = (Input.GetAxisRaw("Vertical") + joystick.Vertical);
-        float jump = Input.GetAxisRaw("Jump");
+        float jump = Input.GetAxisRaw("Jump") + ((UIControls.jumpButtonDown) ? 1.0f : 0.0f);
         float mass = rigidbody.mass * rigidbody.gravityScale;
 
         //animator.PassInInput(x, y);
