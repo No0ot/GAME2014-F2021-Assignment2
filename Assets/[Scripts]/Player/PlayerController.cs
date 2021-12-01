@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Touch Input")]
+    public Joystick joystick;
+
     [Header("Base Movement")]
     public float horizontalForce;
     public float jumpForce;
@@ -22,13 +25,13 @@ public class PlayerController : MonoBehaviour
     public LayerMask wallLayerMask;
     public float wallRadius;
 
-
     [Header("References")]
     private Rigidbody2D rigidbody;
     private Animator animatorController;
     public Transform groundOrigin;
     public Transform wallOrigin;
     public GameObject sprite;
+    public PlayerAnimationScript animator;
 
     private void Start()
     {
@@ -44,11 +47,23 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // Keyboard Input
-        float x = (Input.GetAxisRaw("Horizontal"));
-        float y = (Input.GetAxisRaw("Vertical"));
+        float x = (Input.GetAxisRaw("Horizontal") + joystick.Horizontal);
+        float y = (Input.GetAxisRaw("Vertical") + joystick.Vertical);
         float jump = Input.GetAxisRaw("Jump");
         float mass = rigidbody.mass * rigidbody.gravityScale;
 
+        //animator.PassInInput(x, y);
+        animator.PassInVelocity(Mathf.Abs(rigidbody.velocity.x), rigidbody.velocity.y);
+        if (jump != 0)
+            animator.IsJumping(true);
+        else
+            animator.IsJumping(false);
+        if(wallSlide)
+            animator.IsWallSliding(true);
+        else
+            animator.IsWallSliding(false);
+
+        animator.IsGrounded(isGrounded);
         if (isGrounded)
         {
             wallSlide = false;
@@ -59,10 +74,10 @@ public class PlayerController : MonoBehaviour
             {
                 x = FlipAnimation(x);
             }
-           
+
             float jumpMoveForce = jump * jumpForce;
 
-            
+
 
             rigidbody.AddForce(new Vector2(LimitSpeed(x), jumpMoveForce) * mass);
             rigidbody.velocity *= 0.99f; // scaling / stopping hack
@@ -78,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
                 rigidbody.AddForce(new Vector2(horizontalMoveForce, 0.0f) * mass);
             }
-            
+
 
         }
 
@@ -87,12 +102,14 @@ public class PlayerController : MonoBehaviour
         if (wallJumpDirection != 0 && !isGrounded && x != 0)
         {
             wallSlide = true;
-            FlipAnimation(-x);
+           //FlipAnimation(-x);
         }
         else
             wallSlide = false;
         if (wallSlide)
+        {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, -wallSlideSpeed);
+        }
 
         if (jump != 0 && wallSlide)
             wallJump = true;
