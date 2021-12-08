@@ -56,10 +56,7 @@ public class PlayerController : MonoBehaviour
         Move();
         CheckIfGrounded();
         Attack();
-        transform.position = animator.gameObject.transform.position;
-        transform.position += -transform.right * originalLocalPosition.x;
-        transform.position += -transform.up * originalLocalPosition.y;
-        animator.gameObject.transform.localPosition = originalLocalPosition;
+        FollowSprite();
     }
 
     private void Move()
@@ -249,5 +246,13 @@ public class PlayerController : MonoBehaviour
     public void ResetGravity()
     {
         rigidbody.gravityScale = 3;
+    }
+
+    public void FollowSprite()
+    {
+        transform.position = animator.gameObject.transform.position;
+        transform.position += -transform.right * originalLocalPosition.x;
+        transform.position += -transform.up * originalLocalPosition.y;
+        animator.gameObject.transform.localPosition = originalLocalPosition;
     }
 }
