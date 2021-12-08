@@ -25,23 +25,37 @@ public class PlayerController : MonoBehaviour
     public LayerMask wallLayerMask;
     public float wallRadius;
 
+    [Header("Attack")]
+    bool canAttack;
+    public bool isAttacking;
+
     [Header("References")]
     private Rigidbody2D rigidbody;
-    private Animator animatorController;
     public Transform groundOrigin;
     public Transform wallOrigin;
     public GameObject sprite;
+
+    [Header("Animation")]
+    private Animator animatorController;
     public PlayerAnimationScript animator;
+    private Vector3 originalLocalPosition;
 
     private void Start()
     {
+        originalLocalPosition = animator.gameObject.transform.localPosition;
         rigidbody = GetComponent<Rigidbody2D>();
+        canAttack = true;
     }
 
     void FixedUpdate()
     {
         Move();
         CheckIfGrounded();
+        Attack();
+        transform.position = animator.gameObject.transform.position;
+        transform.position += -transform.right * originalLocalPosition.x;
+        transform.position += -transform.up * originalLocalPosition.y;
+        animator.gameObject.transform.localPosition = originalLocalPosition;
     }
 
     private void Move()
@@ -49,7 +63,10 @@ public class PlayerController : MonoBehaviour
         // Keyboard Input
         float x = (Input.GetAxisRaw("Horizontal") + joystick.Horizontal);
         float y = (Input.GetAxisRaw("Vertical") + joystick.Vertical);
-        float jump = Input.GetAxisRaw("Jump") + ((UIControls.jumpButtonDown) ? 1.0f : 0.0f);
+        float jump = 0;
+        if (!isAttacking)
+            jump = Input.GetAxisRaw("Jump") + ((UIControls.jumpButtonDown) ? 1.0f : 0.0f);
+
         float mass = rigidbody.mass * rigidbody.gravityScale;
 
         //animator.PassInInput(x, y);
@@ -77,8 +94,6 @@ public class PlayerController : MonoBehaviour
 
             float jumpMoveForce = jump * jumpForce;
 
-
-
             rigidbody.AddForce(new Vector2(LimitSpeed(x), jumpMoveForce) * mass);
             rigidbody.velocity *= 0.99f; // scaling / stopping hack
         }
@@ -87,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
             if (x != 0)
             {
-                x = FlipAnimation(x);
+                //x = FlipAnimation(x);
 
                 float horizontalMoveForce = LimitSpeed(x) * airControlFactor;
 
@@ -118,27 +133,53 @@ public class PlayerController : MonoBehaviour
         {
             wallJump = false;
             rigidbody.AddForce(new Vector2(walljumpForce.x * wallJumpDirection, walljumpForce.y) * mass);
+            FlipAnimation(-x);
         }
     }
 
     private float LimitSpeed(float x)
     {
         float moveForce = 0;
+        float tempMaxSpeed = maxSpeed;
+        if (isAttacking)
+            tempMaxSpeed *= 0.25f;
         if (x > 0)
         {
-            if (rigidbody.velocity.x < maxSpeed)
+            if (rigidbody.velocity.x < tempMaxSpeed)
                 moveForce = x * horizontalForce;
             else
                 moveForce = 0;
         }
         else if (x < 0)
         {
-            if (rigidbody.velocity.x > -maxSpeed)
+            if (rigidbody.velocity.x > -tempMaxSpeed)
                 moveForce = x * horizontalForce;
             else
                 moveForce = 0;
         }
+
         return moveForce;
+    }
+
+    private void Attack()
+    {
+        float a = (Input.GetAxisRaw("Fire1"));
+        float h = (Input.GetAxisRaw("Fire2"));
+
+        if (a != 0)
+        {
+            animator.LightAttack();
+            isAttacking = true;
+        }
+        if (h != 0)
+        {
+            animator.HeavyAttack();
+            isAttacking = true;
+            if (!isGrounded)
+                rigidbody.gravityScale = 12;
+        }
+
+
     }
     private float CheckWallSlideDirection()
     {
@@ -192,5 +233,10 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(wallOrigin.position, wallRadius);
 
+    }
+
+    public void ResetGravity()
+    {
+        rigidbody.gravityScale = 3;
     }
 }

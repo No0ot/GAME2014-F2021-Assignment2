@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimationScript : MonoBehaviour
 {
+    public PlayerController controller;
     private Animator animator;
     Vector2 velocity;
     Vector2 input;
@@ -23,6 +24,8 @@ public class PlayerAnimationScript : MonoBehaviour
 
         animator.SetFloat("VelX", velocity.x);
         animator.SetFloat("VelY", velocity.y);
+
+      
     }
 
     public void IsRunning(bool tf)
@@ -45,6 +48,16 @@ public class PlayerAnimationScript : MonoBehaviour
         animator.SetBool("isGrounded", tf);
     }
 
+    public void LightAttack()
+    {
+        animator.SetTrigger("LightAttack");
+    }
+
+    public void HeavyAttack()
+    {
+        animator.SetTrigger("HeavyAttack");
+    }
+
     public void PassInVelocity(float x, float y)
     {
         velocity = new Vector2(x, y);
@@ -55,6 +68,8 @@ public class PlayerAnimationScript : MonoBehaviour
     {
         input = new Vector2(x, y);
     }
+
+
 
 }
 
