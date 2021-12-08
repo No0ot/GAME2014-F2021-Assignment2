@@ -7,6 +7,13 @@ public class PlayerController : MonoBehaviour
     [Header("Touch Input")]
     public Joystick joystick;
 
+    [Header("Stats")]
+    public float maxHealth = 100f;
+    public float health;
+    public float maxEnergy = 100f;
+    public float energy;
+    public float energyRegenRate;
+
     [Header("Base Movement")]
     public float horizontalForce;
     public float jumpForce;
@@ -26,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public float wallRadius;
 
     [Header("Attack")]
+    public float lightAttackEnergyCost;
+    public float heavyAttackEnergyCost;
     public bool isAttacking;
     public GameObject groundLightAttackCollider;
     public GameObject groundHeavyAttackCollider;
@@ -49,14 +58,18 @@ public class PlayerController : MonoBehaviour
         originalLocalPosition = animator.gameObject.transform.localPosition;
         rigidbody = GetComponent<Rigidbody2D>();
         canAttack = true;
+        health = maxHealth;
+        energy = maxEnergy;
     }
 
     void FixedUpdate()
     {
         Move();
         CheckIfGrounded();
-        Attack();
+        if(!isAttacking)
+            Attack();
         FollowSprite();
+        RegenerateEnergy();
     }
 
     private void Move()
@@ -167,17 +180,20 @@ public class PlayerController : MonoBehaviour
         float a = (Input.GetAxisRaw("Fire1"));
         float h = (Input.GetAxisRaw("Fire2"));
 
-        if (a != 0)
+        if (a != 0 && energy > lightAttackEnergyCost)
         {
             animator.LightAttack();
             isAttacking = true;
+            energy -= lightAttackEnergyCost;
         }
-        if (h != 0)
+        if (h != 0 && energy > heavyAttackEnergyCost)
         {
             animator.HeavyAttack();
             isAttacking = true;
             if (!isGrounded)
                 rigidbody.gravityScale = 6;
+
+            energy -= heavyAttackEnergyCost;
         }
 
         if(!isAttacking)
@@ -254,5 +270,18 @@ public class PlayerController : MonoBehaviour
         transform.position += -transform.right * originalLocalPosition.x;
         transform.position += -transform.up * originalLocalPosition.y;
         animator.gameObject.transform.localPosition = originalLocalPosition;
+    }
+
+    private void RegenerateEnergy()
+    {
+        if (energy < 0)
+            energy = 0;
+        if(energy < maxEnergy)
+        {
+            energy += energyRegenRate;
+        }
+
+        if (energy > maxEnergy)
+            energy = maxEnergy;
     }
 }

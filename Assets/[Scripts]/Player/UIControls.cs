@@ -8,12 +8,6 @@ public class UIControls : MonoBehaviour
     public static bool jumpButtonDown;
     public static bool lightAttackButtonDown;
     public static bool heavyAttackButtonDown;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void OnJumpButton_Down()
     {
         jumpButtonDown = true;
