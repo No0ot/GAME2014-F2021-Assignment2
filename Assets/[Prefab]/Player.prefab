@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2208405091456985044}
   - component: {fileID: 2208405091456985048}
   - component: {fileID: 7749281615450276246}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -87,6 +87,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
+  maxHealth: 100
+  health: 0
+  maxEnergy: 100
+  energy: 0
+  energyRegenRate: 0
   horizontalForce: 20
   jumpForce: 120
   isGrounded: 0
@@ -104,6 +109,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   wallRadius: 0.65
+  lightAttackEnergyCost: 0
+  heavyAttackEnergyCost: 0
   isAttacking: 0
   groundLightAttackCollider: {fileID: 0}
   groundHeavyAttackCollider: {fileID: 0}
@@ -125,6 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7b5f585a4bc724da5fa61564097e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyNum: 0
+  scoreNum: 0
 --- !u!1 &6075594504596026785
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5333822299586205936}
   - component: {fileID: 8588018755085490487}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HeavyAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3268953905484147669}
   - component: {fileID: 6744314413912817519}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HeavyAirAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +240,7 @@ GameObject:
   - component: {fileID: 9144958736387042876}
   - component: {fileID: 1707382742482733279}
   - component: {fileID: 7927736196094528601}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4089170094216639447}
   - component: {fileID: 6948919242933085464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LightAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3989006451273453739}
   - component: {fileID: 3734003544794170015}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LightAirAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 595284162064376918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8050548640033880999}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

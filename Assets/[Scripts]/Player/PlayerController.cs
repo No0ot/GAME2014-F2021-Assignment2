@@ -213,12 +213,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hitRight = Physics2D.Linecast(wallOrigin.position, wallOrigin.position - (Vector3.left *  wallRadius), wallLayerMask);
         if (hitRight)
         {
-            Debug.Log(-1);
             return -1;
         }
         else if (hitLeft)
         {
-            Debug.Log(1);
             return 1;
         }
         else
@@ -283,5 +281,14 @@ public class PlayerController : MonoBehaviour
 
         if (energy > maxEnergy)
             energy = maxEnergy;
+    }
+
+    public void TakeDamage(float damage, Vector2 attackdirection)
+    {
+        health -= damage;
+        Vector2 temp = new Vector2 (-attackdirection.x * 200, 500);
+        Debug.Log(temp);
+        rigidbody.AddForce(temp);
+        animator.TakeDamage(true);
     }
 }

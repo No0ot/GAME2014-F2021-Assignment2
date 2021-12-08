@@ -75,7 +75,10 @@ public class PlayerAnimationScript : MonoBehaviour
         input = new Vector2(x, y);
     }
 
-
+    public void TakeDamage(bool tf)
+    {
+        animator.SetBool("TakeDamage", true);
+    }
 
 }
 

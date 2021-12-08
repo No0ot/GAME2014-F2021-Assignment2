@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackBehaviour : StateMachineBehaviour
+public class EnemyAttackBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,10 +19,8 @@ public class AttackBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("LightAttack", false);
-        animator.SetBool("HeavyAttack", false);
-        animator.gameObject.GetComponent<PlayerAnimationScript>().controller.isAttacking = false;
-        animator.gameObject.GetComponent<PlayerAnimationScript>().controller.ResetGravity();
+        animator.SetBool("isAttacking", false);
+        animator.gameObject.transform.parent.GetComponent<EnemyScript>().isAttacking = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2270834451660272956}
   - component: {fileID: 12522208031400144}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Assets_94
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4359916220524010768}
   - component: {fileID: 3163433605918463594}
   - component: {fileID: 3402840194181492042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3693664489655285656}
   - component: {fileID: 9183564286884530698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Assets_94 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4085875008302681114}
   - component: {fileID: 708853550962173461}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Assets_94 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3141684342216442478}
   - component: {fileID: 5232594280875148067}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Assets_95
   m_TagString: Untagged
   m_Icon: {fileID: 0}
