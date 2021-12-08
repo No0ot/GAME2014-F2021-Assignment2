@@ -26,8 +26,12 @@ public class PlayerController : MonoBehaviour
     public float wallRadius;
 
     [Header("Attack")]
-    bool canAttack;
     public bool isAttacking;
+    public GameObject groundLightAttackCollider;
+    public GameObject groundHeavyAttackCollider;
+    public GameObject airLightAttackCollider;
+    public GameObject airHeavyAttackCollider;
+    bool canAttack;
 
     [Header("References")]
     private Rigidbody2D rigidbody;
@@ -176,9 +180,16 @@ public class PlayerController : MonoBehaviour
             animator.HeavyAttack();
             isAttacking = true;
             if (!isGrounded)
-                rigidbody.gravityScale = 12;
+                rigidbody.gravityScale = 6;
         }
 
+        if(!isAttacking)
+        {
+            groundLightAttackCollider.SetActive(false);
+            groundHeavyAttackCollider.SetActive(false);
+            airLightAttackCollider.SetActive(false);
+            airHeavyAttackCollider.SetActive(false);
+        }
 
     }
     private float CheckWallSlideDirection()
