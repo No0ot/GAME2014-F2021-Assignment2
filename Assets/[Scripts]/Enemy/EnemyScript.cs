@@ -28,6 +28,7 @@ public class EnemyScript : MonoBehaviour
     [Header("Stats")]
     public float maxHealth = 100;
     public float health;
+    public bool isDead;
 
     [Header("Animation")]
     Animator animator;
@@ -36,15 +37,27 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         rigidbody =  GetComponent<Rigidbody2D>();
-        animator = transform.GetChild(0).GetComponent<Animator>();
-        enemyLOS = GetComponent<LOS>();
-        maxHealth = health;
+        animator = transform.GetChild(1).GetComponent<Animator>();
+        enemyLOS = transform.GetChild(0).GetComponent<LOS>();
+        health = maxHealth;
+        isDead = false;
     }
 
     public void Move()
     {
-        rigidbody.AddForce(Vector2.right * runForce * transform.localScale.x);
-        rigidbody.velocity *= 0.90f;
+        if (isGroundAhead)
+        {
+            if (target == null)
+                rigidbody.AddForce(Vector2.right * runForce * transform.localScale.x);
+            else
+                rigidbody.AddForce(Vector2.right * (runForce * 2) * transform.localScale.x);
+            rigidbody.velocity *= 0.90f;
+        }
+        else
+            Flip();
+
+        if (isWallAhead)
+            Flip();
     }
 
     public void UpdateAnimator()
@@ -80,6 +93,7 @@ public class EnemyScript : MonoBehaviour
             if ((enemyLOS.collidesWith.gameObject.CompareTag("Player")) &&
                 (enemyLOS.colliderList[0].gameObject.CompareTag("Player")))
             {
+                target = enemyLOS.colliderList[0].gameObject;
                 return true;
             }
             // Case 2 player is in the Collider List and we can draw ray to the player
@@ -93,13 +107,14 @@ public class EnemyScript : MonoBehaviour
 
                         if ((hit) && (hit.collider.gameObject.CompareTag("Player")))
                         {
+                            target = enemyLOS.colliderList[0].gameObject;
                             return true;
                         }
                     }
                 }
             }
         }
-
+        target = null;
         return false;
     }
 
@@ -118,6 +133,22 @@ public class EnemyScript : MonoBehaviour
             return true;
         else
             return false;
-        
+    }
+
+    public void TakeDamage(float damage, Vector2 attackdirection)
+    {
+        health -= damage;
+        Vector2 temp = new Vector2(-attackdirection.x * 200, 500);
+        rigidbody.AddForce(temp);
+        animator.SetBool("TakeDamage", true);
+
+        if(health <= 0)
+        {
+            attackCollider.SetActive(false);
+            GetComponent<Collider2D>().enabled = false;
+            isDead = true;
+            animator.SetBool("isDead", true);
+        }
+            
     }
 }

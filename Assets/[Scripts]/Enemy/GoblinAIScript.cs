@@ -10,6 +10,9 @@ public class GoblinAIScript : MonoBehaviour
     float idleTimerMax = 2.0f;
     float idleTimer;
 
+    float deathTimerMax = 2.0f;
+    float deathTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,11 @@ public class GoblinAIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ResolveAI();
+        if (controller.isDead)
+            state = AIState.DEATH;
+
+       ResolveAI();
+
     }
 
     private void ResolveAI()
@@ -29,6 +36,7 @@ public class GoblinAIScript : MonoBehaviour
         {
             case AIState.IDLE:
                 Idle();
+                controller.LookAhead();
                 if (controller.HasLOS())
                 {
                     state = AIState.ATTACK;
@@ -39,8 +47,8 @@ public class GoblinAIScript : MonoBehaviour
                 controller.Move();
                 controller.LookAhead();
                 controller.UpdateAnimator();
-                if (!controller.isGroundAhead || controller.isWallAhead)
-                    controller.Flip();
+                //if (!controller.isGroundAhead || controller.isWallAhead)
+                //    controller.Flip();
                 if (controller.HasLOS())
                     state = AIState.ATTACK;
                 break;
@@ -49,11 +57,19 @@ public class GoblinAIScript : MonoBehaviour
                 if (controller.InRangeOfPlayer())
                     controller.Attack();
                 else
+                {
+                    controller.LookAhead();
                     controller.Move();
+                    //if (!controller.isGroundAhead || controller.isWallAhead)
+                    //    controller.Flip();
+                }
                 if (!controller.HasLOS())
                     state = AIState.IDLE;
                 break;
             case AIState.FLEE:
+                break;
+            case AIState.DEATH:
+                Death();
                 break;
         }
     }
@@ -67,6 +83,19 @@ public class GoblinAIScript : MonoBehaviour
         {
             state = AIState.PATROL;
             idleTimer = 0;
+        }
+    }
+
+    private void Death()
+    {
+        controller.attackCollider.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
+        if (deathTimer < deathTimerMax)
+            deathTimer += Time.deltaTime;
+        else
+        {
+            gameObject.SetActive(false);
+            deathTimer = 0;
         }
     }
 }

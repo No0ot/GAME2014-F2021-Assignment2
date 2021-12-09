@@ -9,6 +9,7 @@ public enum AIState
     PATROL,
     ATTACK,
     FLEE,
+    DEATH,
     NUM_OF_AI_STATES
 }
 

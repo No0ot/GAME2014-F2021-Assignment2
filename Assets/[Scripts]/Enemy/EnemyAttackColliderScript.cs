@@ -5,20 +5,28 @@ using UnityEngine;
 public class EnemyAttackColliderScript : MonoBehaviour
 {
     float damage;
+    bool canDamage = true;
     private void Start()
     {
         damage = transform.parent.GetComponent<EnemyScript>().attackDamage;
     }
-
+    private void OnDisable()
+    {
+        canDamage = true;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (canDamage)
         {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            Vector2 temp = collision.ClosestPoint(transform.position);
-            Vector2 temp2 = new Vector2(temp.x - player.transform.position.x, temp.y - player.transform.position.y);
-            temp2.Normalize();
-            player.TakeDamage(damage, temp2);
+            if (collision.CompareTag("Player"))
+            {
+                PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+                Vector2 temp = collision.ClosestPoint(transform.position);
+                Vector2 temp2 = new Vector2(temp.x - player.transform.position.x, temp.y - player.transform.position.y);
+                temp2.Normalize();
+                player.TakeDamage(damage, temp2);
+                canDamage = false;
+            }
         }
     }
 }
