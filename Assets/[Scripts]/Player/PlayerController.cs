@@ -250,10 +250,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(groundOrigin.position, groundRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(wallOrigin.position, wallRadius);
+        //Gizmos.color = Color.green;
+        //Gizmos.DrawWireSphere(groundOrigin.position, groundRadius);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(wallOrigin.position, wallRadius);
 
     }
 

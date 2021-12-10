@@ -71,7 +71,7 @@ public class EnemyScript : MonoBehaviour
                 rigidbody.AddForce(Vector2.right * runForce * transform.localScale.x);
             else
                 rigidbody.AddForce(Vector2.right * (runForce * 2) * transform.localScale.x);
-            rigidbody.velocity *= 0.90f;
+            rigidbody.velocity *= 0.99f;
         }
         else
             Flip();
@@ -93,13 +93,14 @@ public class EnemyScript : MonoBehaviour
 
     public void Flip()
     {
+        rigidbody.velocity *= 0.50f;
         transform.localScale = new Vector3(transform.localScale.x * -1.0f, transform.localScale.y, transform.localScale.z);
     }
 
     public void LookAhead()
     {
         var hit = Physics2D.Linecast(transform.position, groundCheckPoint.position, groundLayerMask);
-        isGroundAhead = (hit) ? true : false;
+        isGroundAhead = (hit) ? false : true;
 
         var wallhit = Physics2D.Linecast(transform.position, wallCheckPoint.position, wallLayerMask);
         isWallAhead = (wallhit) ? true : false;

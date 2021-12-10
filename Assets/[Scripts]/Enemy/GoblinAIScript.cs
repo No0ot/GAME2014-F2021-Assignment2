@@ -26,7 +26,7 @@ public class GoblinAIScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (controller.isDead)
             state = AIState.DEATH;

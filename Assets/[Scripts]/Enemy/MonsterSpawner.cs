@@ -9,20 +9,22 @@ public class MonsterSpawner : MonoBehaviour
     public float spawnTime;
     float spawnCounter;
     Animator animator;
+    public int maxSpawnAmount;
     public bool canSpawn;
+    public EnemyScript[] monsters;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnPosition = transform;
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
         canSpawn = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canSpawn)
+        if (canSpawn && monsters.Length - 1 <= maxSpawnAmount)
         {
             spawnCounter += Time.deltaTime;
             if (spawnCounter >= spawnTime)
@@ -31,6 +33,8 @@ public class MonsterSpawner : MonoBehaviour
                 spawnCounter = 0;
             }
         }
+        monsters = GetComponentsInChildren<EnemyScript>();
+
     }
 
     void SpawnMonster()
