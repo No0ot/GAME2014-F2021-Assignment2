@@ -233,6 +233,10 @@ SpriteAtlas:
   - {fileID: -7193690695572504645, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
   - {fileID: 3523569273739361946, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
   - {fileID: 5259002111299480148, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
+  - {fileID: -2883895470289388798, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
+  - {fileID: 2586070106338840274, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
+  - {fileID: 2085717655351922032, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
+  - {fileID: 5205744304934593272, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
   - {fileID: 1720424432060433035, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
   - {fileID: 5623549970291177892, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
   - {fileID: -2536387679159716569, guid: 1e3eee88c10885f4dae8dfa9f59fa2be, type: 3}
@@ -430,6 +434,10 @@ SpriteAtlas:
   - Assets_79
   - Assets_89
   - Assets_88
+  - DungeonTileset_0
+  - DungeonTileset_1
+  - DungeonTileset_2
+  - DungeonTileset_3
   - Assets_171
   - Assets_170
   - Assets_173

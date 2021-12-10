@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    GOBLIN,
+    FLYINGEYE,
+    SKELETON
+}
+
 public class EnemyScript : MonoBehaviour
 {
     Rigidbody2D rigidbody;
@@ -29,6 +36,7 @@ public class EnemyScript : MonoBehaviour
     public float maxHealth = 100;
     public float health;
     public bool isDead;
+    public EnemyType type;
 
     [Header("Animation")]
     Animator animator;
@@ -41,6 +49,18 @@ public class EnemyScript : MonoBehaviour
         enemyLOS = transform.GetChild(0).GetComponent<LOS>();
         health = maxHealth;
         isDead = false;
+    }
+    private void OnDisable()
+    {
+        GetComponent<Collider2D>().enabled = true;
+        
+    }
+
+    private void OnEnable()
+    {
+        health = maxHealth;
+        isDead = false;
+        GetComponent<Collider2D>().enabled = true;
     }
 
     public void Move()

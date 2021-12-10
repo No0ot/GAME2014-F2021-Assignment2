@@ -13,6 +13,11 @@ public class GoblinAIScript : MonoBehaviour
     float deathTimerMax = 2.0f;
     float deathTimer;
 
+    private void OnEnable()
+    {
+        state = AIState.IDLE;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +99,7 @@ public class GoblinAIScript : MonoBehaviour
             deathTimer += Time.deltaTime;
         else
         {
+            transform.parent = EnemyManager.Instance.transform;
             gameObject.SetActive(false);
             deathTimer = 0;
         }
