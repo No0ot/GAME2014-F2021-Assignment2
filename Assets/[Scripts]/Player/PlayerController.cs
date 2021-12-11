@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public float lightAttackEnergyCost;
     public float heavyAttackEnergyCost;
     public bool isAttacking;
+    public bool canTakeDamage;
     public GameObject groundLightAttackCollider;
     public GameObject groundHeavyAttackCollider;
     public GameObject airLightAttackCollider;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
         health = maxHealth;
         energy = maxEnergy;
+        canTakeDamage = true;
     }
 
     void FixedUpdate()
@@ -285,10 +287,14 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage, Vector2 attackdirection)
     {
-        health -= damage;
-        Vector2 temp = new Vector2 (-attackdirection.x * 10, 10);
-        //Debug.Log(temp);
-        rigidbody.AddForce(temp, ForceMode2D.Impulse);
-        animator.TakeDamage(true);
+        if (canTakeDamage)
+        {
+            health -= damage;
+            canTakeDamage = false;
+            Vector2 temp = new Vector2(-attackdirection.x * 10, 10);
+            //Debug.Log(temp);
+            rigidbody.AddForce(temp, ForceMode2D.Impulse);
+            animator.TakeDamage(true);
+        }
     }
 }

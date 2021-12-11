@@ -28,6 +28,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject attackCollider;
     public bool isAttacking;
     public float attackDamage;
+    public bool canTakeDamage;
 
     [Header("Player Detection")]
     public LOS enemyLOS;
@@ -52,6 +53,7 @@ public class EnemyScript : MonoBehaviour
         enemyLOS = transform.GetChild(0).GetComponent<LOS>();
         health = maxHealth;
         isDead = false;
+        canTakeDamage = true;
     }
     private void OnDisable()
     {
@@ -202,17 +204,20 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(float damage, Vector2 attackdirection)
     {
-        health -= damage;
-        Vector2 temp = new Vector2(-attackdirection.x * 10, 5);
-        rigidbody.AddForce(temp, ForceMode2D.Impulse);
-        animator.SetBool("TakeDamage", true);
-
-        if(health <= 0)
+        if (canTakeDamage)
         {
-            attackCollider.SetActive(false);
-            GetComponent<Collider2D>().enabled = false;
-            isDead = true;
-            animator.SetBool("isDead", true);
+            health -= damage;
+            Vector2 temp = new Vector2(-attackdirection.x * 10, 5);
+            rigidbody.AddForce(temp, ForceMode2D.Impulse);
+            animator.SetBool("TakeDamage", true);
+            canTakeDamage = false;
+            if (health <= 0)
+            {
+                attackCollider.SetActive(false);
+                GetComponent<Collider2D>().enabled = false;
+                isDead = true;
+                animator.SetBool("isDead", true);
+            }
         }
             
     }

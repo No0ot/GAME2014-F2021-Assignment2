@@ -20,6 +20,13 @@ public class TakeDamageBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("TakeDamage", false);
+
+
+        if (animator.transform.parent.GetComponent<PlayerController>())
+            animator.transform.parent.GetComponent<PlayerController>().canTakeDamage = true;
+        else if (animator.transform.parent.GetComponent<EnemyScript>())
+            animator.transform.parent.GetComponent<EnemyScript>().canTakeDamage = true;
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
