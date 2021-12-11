@@ -8,7 +8,7 @@ public class EnemyAttackColliderScript : MonoBehaviour
     bool canDamage = true;
     private void Start()
     {
-        damage = transform.parent.GetComponent<EnemyScript>().attackDamage;
+        //damage = transform.parent.GetComponent<EnemyScript>().attackDamage;
     }
     private void OnDisable()
     {
@@ -24,7 +24,7 @@ public class EnemyAttackColliderScript : MonoBehaviour
                 Vector2 temp = collision.ClosestPoint(transform.position);
                 Vector2 temp2 = new Vector2(temp.x - player.transform.position.x, temp.y - player.transform.position.y);
                 temp2.Normalize();
-                player.TakeDamage(damage, temp2);
+                player.TakeDamage(transform.parent.transform.parent.GetComponent<EnemyScript>().attackDamage, temp2);
                 canDamage = false;
             }
         }

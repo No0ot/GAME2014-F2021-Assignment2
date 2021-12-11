@@ -78,7 +78,6 @@ public class EnemyScript : MonoBehaviour
                 else
                 {
                     rigidbody.AddForce(Vector2.right * (LimitSpeed(transform.localScale.x) * 2) * transform.localScale.x);
-                    Debug.Log(transform.localScale.x);
                 }
                 rigidbody.velocity *= 0.99f;
             
@@ -173,7 +172,7 @@ public class EnemyScript : MonoBehaviour
     public void Attack()
     {
         animator.SetBool("isAttacking", true);
-        attackCollider.SetActive(true);
+        //attackCollider.SetActive(true);
         isAttacking = true;
     }
 

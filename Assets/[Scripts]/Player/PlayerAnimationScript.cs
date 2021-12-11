@@ -49,19 +49,19 @@ public class PlayerAnimationScript : MonoBehaviour
     public void LightAttack()
     {
         animator.SetTrigger("LightAttack");
-        if (controller.isGrounded && !controller.isAttacking)
-            controller.groundLightAttackCollider.SetActive(true);
-        else if(!controller.isAttacking)
-            controller.airLightAttackCollider.SetActive(true);
+        //if (controller.isGrounded && !controller.isAttacking)
+        //    controller.groundLightAttackCollider.SetActive(true);
+        //else if(!controller.isAttacking)
+        //    controller.airLightAttackCollider.SetActive(true);
     }
 
     public void HeavyAttack()
     {
         animator.SetTrigger("HeavyAttack");
-        if (controller.isGrounded && !controller.isAttacking)
-            controller.groundHeavyAttackCollider.SetActive(true);
-        else if(!controller.isAttacking)
-            controller.airHeavyAttackCollider.SetActive(true);
+        //if (controller.isGrounded && !controller.isAttacking)
+        //    controller.groundHeavyAttackCollider.SetActive(true);
+        //else if(!controller.isAttacking)
+        //    controller.airHeavyAttackCollider.SetActive(true);
     }
 
     public void PassInVelocity(float x, float y)
