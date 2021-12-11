@@ -16,7 +16,7 @@ public class FloatingPlatform : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         originalPosition = transform.position;
-        floatUp = false;
+        floatUp = true;
         floatDown = false;
     }
 
@@ -50,6 +50,10 @@ public class FloatingPlatform : MonoBehaviour
             collision.gameObject.transform.SetParent(this.gameObject.transform);
             //rigidbody.bodyType = RigidbodyType2D.Dynamic;
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.transform.SetParent(this.gameObject.transform);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -61,6 +65,10 @@ public class FloatingPlatform : MonoBehaviour
             rigidbody.velocity *= 0;
             //rigidbody.bodyType = RigidbodyType2D.Kinematic;
             floatUp = true;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.transform.SetParent(this.gameObject.transform);
         }
     }
 }

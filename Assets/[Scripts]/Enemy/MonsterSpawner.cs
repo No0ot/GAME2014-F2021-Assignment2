@@ -11,6 +11,8 @@ public class MonsterSpawner : MonoBehaviour
     Animator animator;
     public int maxSpawnAmount;
     public bool canSpawn;
+    public bool directionSwitch;
+    bool direction;
     public EnemyScript[] monsters;
 
     // Start is called before the first frame update
@@ -19,12 +21,13 @@ public class MonsterSpawner : MonoBehaviour
         spawnPosition = transform;
         animator = transform.GetChild(0).GetComponent<Animator>();
         canSpawn = false;
+        direction = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canSpawn && monsters.Length - 1 <= maxSpawnAmount)
+        if (canSpawn && monsters.Length < maxSpawnAmount)
         {
             spawnCounter += Time.deltaTime;
             if (spawnCounter >= spawnTime)
@@ -45,5 +48,18 @@ public class MonsterSpawner : MonoBehaviour
         monster.transform.position = spawnPosition.position;
         monster.transform.parent = this.transform;
         animator.SetTrigger("Spawn");
+
+        if (directionSwitch)
+        {
+            if (direction)
+            {
+                monster.transform.localScale = new Vector3(transform.localScale.x * -1.0f, transform.localScale.y, transform.localScale.z);
+                direction = false;
+            }
+            else
+                direction = true;
+        }
+
+
      }
 }

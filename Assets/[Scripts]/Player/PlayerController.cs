@@ -286,9 +286,9 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage, Vector2 attackdirection)
     {
         health -= damage;
-        Vector2 temp = new Vector2 (-attackdirection.x * 200, 500);
-        Debug.Log(temp);
-        rigidbody.AddForce(temp);
+        Vector2 temp = new Vector2 (-attackdirection.x * 10, 10);
+        //Debug.Log(temp);
+        rigidbody.AddForce(temp, ForceMode2D.Impulse);
         animator.TakeDamage(true);
     }
 }

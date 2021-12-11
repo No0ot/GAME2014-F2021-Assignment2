@@ -53,7 +53,7 @@ public class EnemyScript : MonoBehaviour
     private void OnDisable()
     {
         GetComponent<Collider2D>().enabled = true;
-        
+        transform.localScale = new Vector3(1.0f, transform.localScale.y, transform.localScale.z);
     }
 
     private void OnEnable()
@@ -159,8 +159,8 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(float damage, Vector2 attackdirection)
     {
         health -= damage;
-        Vector2 temp = new Vector2(-attackdirection.x * 200, 500);
-        rigidbody.AddForce(temp);
+        Vector2 temp = new Vector2(-attackdirection.x * 10, 10);
+        rigidbody.AddForce(temp, ForceMode2D.Impulse);
         animator.SetBool("TakeDamage", true);
 
         if(health <= 0)
