@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rigidbody: {fileID: 6565756731500061625}
+  score: 3
 --- !u!58 &4686449378274972840
 CircleCollider2D:
   m_ObjectHideFlags: 0

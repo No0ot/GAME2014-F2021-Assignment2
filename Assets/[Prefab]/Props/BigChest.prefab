@@ -147,4 +147,6 @@ MonoBehaviour:
   coinMax: 20
   gemMin: 2
   gemMax: 5
+  heartMin: 3
+  heartMax: 4
   breakable: 0

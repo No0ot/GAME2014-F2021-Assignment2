@@ -8,9 +8,12 @@ public class ContainerScript : MonoBehaviour
     public int coinMax;
     public int gemMin;
     public int gemMax;
+    public int heartMin;
+    public int heartMax;
 
     private int coinNum;
     private int gemNum;
+    private int heartNum;
 
     public bool breakable;
     bool opened;
@@ -21,6 +24,7 @@ public class ContainerScript : MonoBehaviour
     {
         coinNum = Random.Range(coinMin, coinMax + 1);
         gemNum = Random.Range(gemMin, gemMax + 1);
+        heartNum = Random.Range(heartMin, heartMax + 1);
         animator = GetComponent<Animator>();
 
         opened = false;
@@ -39,7 +43,7 @@ public class ContainerScript : MonoBehaviour
                     animator.SetTrigger("Open");
 
                     opened = true;
-                    GenerateLoot();
+                    LootManager.Instance.GenerateLoot(coinNum, gemNum, heartNum, transform.position);
                     Invoke("TurnOff", 0.4f);
                 }
             }
@@ -50,26 +54,10 @@ public class ContainerScript : MonoBehaviour
                     animator.SetTrigger("Open");
 
                     opened = true;
-                    GenerateLoot();
+                    LootManager.Instance.GenerateLoot(coinNum, gemNum, heartNum, transform.position);
                 }
             }
             
-        }
-    }
-
-    private void GenerateLoot()
-    {
-        for (int i = 0; i < coinNum; i++)
-        {
-            GameObject temp = LootManager.Instance.GetLoot(LootType.COIN);
-            temp.SetActive(true);
-            temp.transform.position = transform.position;
-        }
-        for (int i = 0; i < gemNum; i++)
-        {
-            GameObject temp = LootManager.Instance.GetLoot(LootType.GEM);
-            temp.SetActive(true);
-            temp.transform.position = transform.position;
         }
     }
 

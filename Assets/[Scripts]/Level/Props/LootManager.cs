@@ -53,4 +53,26 @@ public class LootManager : MonoBehaviour
         }
         return AddLoot(type);
     }
+
+    public void GenerateLoot(int coinNum, int gemNum, int heartNum, Vector3 spawnPosition)
+    {
+        for (int i = 0; i < coinNum; i++)
+        {
+            GameObject temp = GetLoot(LootType.COIN);
+            temp.SetActive(true);
+            temp.transform.position = spawnPosition;
+        }
+        for (int i = 0; i < gemNum; i++)
+        {
+            GameObject temp = GetLoot(LootType.GEM);
+            temp.SetActive(true);
+            temp.transform.position = spawnPosition;
+        }
+        for (int i = 0; i < heartNum; i++)
+        {
+            GameObject temp = GetLoot(LootType.HEART);
+            temp.SetActive(true);
+            temp.transform.position = spawnPosition;
+        }
+    }
 }

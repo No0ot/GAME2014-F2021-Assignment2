@@ -288,15 +288,25 @@ MonoBehaviour:
     m_Bits: 128
   attackCollider: {fileID: 528343020010705485}
   isAttacking: 0
-  attackDamage: 0
+  attackDamage: 16
+  canTakeDamage: 0
   enemyLOS: {fileID: 0}
   target: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  maxHealth: 100
+  maxHealth: 130
   health: 0
   isDead: 0
+  coinMin: 7
+  coinMax: 10
+  gemMin: 1
+  gemMax: 3
+  heartMin: 1
+  heartMax: 3
+  coinNum: 0
+  gemNum: 0
+  heartNum: 0
   type: 2
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!50 &7301001509707275127

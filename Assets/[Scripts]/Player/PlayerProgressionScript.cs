@@ -6,5 +6,4 @@ public class PlayerProgressionScript : MonoBehaviour
 {
     public int keyNum = 0;
     public int scoreNum = 0;
-
 }

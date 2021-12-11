@@ -7,7 +7,7 @@ public class LootFactory : MonoBehaviour
     [Header("Loot Types")]
     public GameObject coinLootPrefab;
     public GameObject gemLootPrefab;
-
+    public GameObject heartLootPrefab;
 
     public GameObject CreateLoot(LootType type)
     {
@@ -19,6 +19,9 @@ public class LootFactory : MonoBehaviour
                 break;
             case LootType.GEM:
                 tempLoot = Instantiate(gemLootPrefab);
+                break;
+            case LootType.HEART:
+                tempLoot = Instantiate(heartLootPrefab);
                 break;
 
         }

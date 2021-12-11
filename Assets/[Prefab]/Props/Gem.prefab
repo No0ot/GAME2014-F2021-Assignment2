@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   rigidbody: {fileID: 8058726949367671354}
+  score: 10
 --- !u!1 &8058726949367671359
 GameObject:
   m_ObjectHideFlags: 0

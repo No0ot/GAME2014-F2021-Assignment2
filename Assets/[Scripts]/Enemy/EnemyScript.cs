@@ -36,9 +36,18 @@ public class EnemyScript : MonoBehaviour
     public LayerMask playerLayerMask;
 
     [Header("Stats")]
-    public float maxHealth = 100;
+    public float maxHealth;
     public float health;
     public bool isDead;
+    public int coinMin;
+    public int coinMax;
+    public int gemMin;
+    public int gemMax;
+    public int heartMin;
+    public int heartMax;
+    public int coinNum;
+    public int gemNum;
+    public int heartNum;
     public EnemyType type;
 
     [Header("Animation")]
@@ -54,6 +63,7 @@ public class EnemyScript : MonoBehaviour
         health = maxHealth;
         isDead = false;
         canTakeDamage = true;
+
     }
     private void OnDisable()
     {
@@ -67,6 +77,9 @@ public class EnemyScript : MonoBehaviour
         isDead = false;
         GetComponent<Collider2D>().enabled = true;
         startPosition = transform.position;
+        coinNum = Random.Range(coinMin, coinMax + 1);
+        gemNum = Random.Range(gemMin, gemMax + 1);
+        heartNum = Random.Range(heartMin, heartMax + 1);
     }
 
     public void Move()
@@ -213,6 +226,7 @@ public class EnemyScript : MonoBehaviour
             canTakeDamage = false;
             if (health <= 0)
             {
+                LootManager.Instance.GenerateLoot(coinNum, gemNum, heartNum, transform.position);
                 attackCollider.SetActive(false);
                 GetComponent<Collider2D>().enabled = false;
                 isDead = true;
