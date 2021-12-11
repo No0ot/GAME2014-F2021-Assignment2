@@ -11,9 +11,11 @@ public enum EnemyType
 
 public class EnemyScript : MonoBehaviour
 {
-    Rigidbody2D rigidbody;
+     private Rigidbody2D rigidbody;
+    public Rigidbody2D Rigidbody { get { return rigidbody; } }
 
     [Header("Movement")]
+    public float maxSpeed;
     public float runForce;
     public bool isGroundAhead;
     public bool isWallAhead;
@@ -40,6 +42,7 @@ public class EnemyScript : MonoBehaviour
 
     [Header("Animation")]
     Animator animator;
+    public Vector3 startPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -61,23 +64,33 @@ public class EnemyScript : MonoBehaviour
         health = maxHealth;
         isDead = false;
         GetComponent<Collider2D>().enabled = true;
+        startPosition = transform.position;
     }
 
     public void Move()
     {
+        
         if (isGroundAhead)
         {
-            if (target == null)
-                rigidbody.AddForce(Vector2.right * runForce * transform.localScale.x);
-            else
-                rigidbody.AddForce(Vector2.right * (runForce * 2) * transform.localScale.x);
-            rigidbody.velocity *= 0.99f;
+
+                if (target == null)
+                    rigidbody.AddForce(Vector2.right * LimitSpeed(transform.localScale.x) * transform.localScale.x);
+                else
+                {
+                    rigidbody.AddForce(Vector2.right * (LimitSpeed(transform.localScale.x) * 2) * transform.localScale.x);
+                    Debug.Log(transform.localScale.x);
+                }
+                rigidbody.velocity *= 0.99f;
+            
         }
         else
             Flip();
 
         if (isWallAhead)
             Flip();
+
+        if (!isAttacking)
+            attackCollider.SetActive(false);
     }
 
     public void UpdateAnimator()
@@ -86,9 +99,6 @@ public class EnemyScript : MonoBehaviour
             animator.SetInteger("VelX", 1);
         else
             animator.SetInteger("VelX", 0);
-
-        if (!isAttacking)
-            attackCollider.SetActive(false);
     }
 
     public void Flip()
@@ -104,6 +114,27 @@ public class EnemyScript : MonoBehaviour
 
         var wallhit = Physics2D.Linecast(transform.position, wallCheckPoint.position, wallLayerMask);
         isWallAhead = (wallhit) ? true : false;
+    }
+
+    private float LimitSpeed(float x)
+    {
+        float moveForce = 0;
+        float tempMaxSpeed = maxSpeed;
+        if (x > 0)
+        {
+            if (rigidbody.velocity.x < tempMaxSpeed)
+                moveForce = x * runForce;
+            else
+                moveForce = 0;
+        }
+        else if (x < 0)
+        {
+            if (rigidbody.velocity.x > -tempMaxSpeed)
+                moveForce = x * -runForce;
+            else
+                moveForce = 0;
+        }
+        return moveForce;
     }
 
     public bool HasLOS()
@@ -146,6 +177,20 @@ public class EnemyScript : MonoBehaviour
         isAttacking = true;
     }
 
+    public void AttackTowardsTarget()
+    {
+        animator.SetBool("isAttacking", true);
+        attackCollider.SetActive(true);
+        isAttacking = true;
+
+        Vector3 targetdirection = new Vector3(transform.position.x - target.transform.position.x,
+                                                      Vector2.down.y,
+                                                      transform.position.z - target.transform.position.z);
+        targetdirection.Normalize();
+
+        rigidbody.AddForce(targetdirection * (runForce / 2) * transform.localScale.x);
+    }
+
     public bool InRangeOfPlayer()
     {
         var wallhit = Physics2D.Linecast(transform.position, wallCheckPoint.position, playerLayerMask);
@@ -159,7 +204,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(float damage, Vector2 attackdirection)
     {
         health -= damage;
-        Vector2 temp = new Vector2(-attackdirection.x * 10, 10);
+        Vector2 temp = new Vector2(-attackdirection.x * 10, 5);
         rigidbody.AddForce(temp, ForceMode2D.Impulse);
         animator.SetBool("TakeDamage", true);
 
@@ -171,5 +216,14 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("isDead", true);
         }
             
+    }
+    
+    public void ReturnToStartHeight()
+    {
+        if (startPosition.y + 0.5 < transform.position.y )
+            rigidbody.AddForce(Vector2.down * runForce);
+        else
+            if(startPosition.y - 0.5 > transform.position.y )
+            rigidbody.AddForce(Vector2.up * runForce);
     }
 }

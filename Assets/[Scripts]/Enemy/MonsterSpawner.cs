@@ -12,7 +12,7 @@ public class MonsterSpawner : MonoBehaviour
     public int maxSpawnAmount;
     public bool canSpawn;
     public bool directionSwitch;
-    bool direction;
+    public bool direction;
     public EnemyScript[] monsters;
 
     // Start is called before the first frame update
@@ -43,23 +43,19 @@ public class MonsterSpawner : MonoBehaviour
     void SpawnMonster()
     {
         GameObject monster = EnemyManager.Instance.GetEnemy(type);
+        monster.transform.position = spawnPosition.position;
         monster.SetActive(true);
-        monster.transform.position = spawnPosition.position;
-        monster.transform.position = spawnPosition.position;
         monster.transform.parent = this.transform;
         animator.SetTrigger("Spawn");
 
         if (directionSwitch)
         {
-            if (direction)
-            {
-                monster.transform.localScale = new Vector3(transform.localScale.x * -1.0f, transform.localScale.y, transform.localScale.z);
-                direction = false;
-            }
-            else
-                direction = true;
+            direction = !direction;
         }
 
-
-     }
+        if (direction)
+        {
+            monster.transform.localScale = new Vector3(transform.localScale.x * -1.0f, transform.localScale.y, transform.localScale.z);
+        }
+    }
 }
