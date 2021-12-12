@@ -45,8 +45,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] playerSounds;
 
     //UI sounds
-    public AudioClip[] clickForward;
-    public AudioClip[] clickBack;
+    public AudioClip clickForward;
+    public AudioClip clickBack;
 
     //Enemy Sounds: 0 = walk/run, 1 = attack, 2 = hurt, 3 = die
     public AudioClip[] goblinSounds;
@@ -177,7 +177,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void PlayRandomClickForward()
     {
-        uiSoundSource.clip = clickForward[Random.Range(0, (clickForward.Length))];
+        uiSoundSource.clip = clickForward;
         uiSoundSource.Play();
     }
     /// <summary>
@@ -185,7 +185,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void PlayRandomClickBackward()
     {
-        uiSoundSource.clip = clickBack[Random.Range(0, (clickBack.Length))];
+        uiSoundSource.clip = clickBack;
         uiSoundSource.Play();
     }
 

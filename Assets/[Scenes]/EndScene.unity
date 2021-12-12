@@ -4222,8 +4222,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d9e110593cc1d2447affc7f6107cf240, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  clickForward: []
-  clickBack: []
+  clickForward: {fileID: 8300000, guid: a65b92b1bde0e634bbec8c3575b21bc0, type: 3}
+  clickBack: {fileID: 8300000, guid: cf2c01e8d8d80124c831766a9e310e57, type: 3}
   goblinSounds:
   - {fileID: 8300000, guid: b011da883ef4d9143b2ae6152315c146, type: 3}
   - {fileID: 8300000, guid: 9681be1a47805cc4db5734badac167a4, type: 3}
@@ -4348,6 +4348,18 @@ MonoBehaviour:
       - m_Target: {fileID: 599685722}
         m_TargetAssemblyTypeName: MenuControlScript, Assembly-CSharp
         m_MethodName: MainMenuButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1485147081}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlayRandomClickBackward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
