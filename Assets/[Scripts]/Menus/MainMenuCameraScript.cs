@@ -35,6 +35,8 @@ public class MainMenuCameraScript : MonoBehaviour
         journeyLength = Vector3.Distance(currentPoint.transform.position, targetPoint.transform.position);
         currentPoint = patrolPoints[startInt];
         targetPoint = patrolPoints[nextInt];
+
+        SoundManager.Instance.PlayMenuMusic();
     }
 
     void Update()

@@ -11,7 +11,6 @@ public class GamePlayUIController : MonoBehaviour
     PlayerProgressionScript progress;
     public Slider healthBar;
     public Slider energyBar;
-
     public TMP_Text score;
 
 
@@ -27,4 +26,5 @@ public class GamePlayUIController : MonoBehaviour
         energyBar.value = playerController.energy / playerController.maxEnergy;
         score.text = progress.scoreNum.ToString();
     }
+
 }

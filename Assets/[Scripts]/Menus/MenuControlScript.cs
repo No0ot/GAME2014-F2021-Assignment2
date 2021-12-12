@@ -17,6 +17,7 @@ public class MenuControlScript : MonoBehaviour
 
     public void MainMenuButton()
     {
+        Destroy(GameManager.Instance.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 

@@ -80,6 +80,17 @@ public class PlayerAnimationScript : MonoBehaviour
         animator.SetBool("TakeDamage", true);
     }
 
+    public void PlayDeath(bool tf)
+    {
+        animator.SetBool("isDead", true);
+        Invoke("DeathScene", 6.0f);
+    }
+
+    public void DeathScene()
+    {
+        GameManager.Instance.DeathScene();
+    }
+
     public void PlayRunSound()
     {
         SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.RUN);

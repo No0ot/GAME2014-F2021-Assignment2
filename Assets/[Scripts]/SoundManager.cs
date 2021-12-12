@@ -163,6 +163,15 @@ public class SoundManager : MonoBehaviour
         bgMusicSource.Play();
     }
 
+    public void PlayEndSceneMusic()
+    {
+        menuMusicSource.Stop();
+        bgMusicSource.Stop();
+        bgMusicSource.clip = null;
+        menuMusicSource.clip = endMusic;
+        menuMusicSource.Play();
+    }
+
     /// <summary>
     /// Plays a random click sound for moving forward in menus.
     /// </summary>

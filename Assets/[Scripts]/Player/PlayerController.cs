@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float maxEnergy = 100f;
     public float energy;
     public float energyRegenRate;
+    public bool isDead;
 
     [Header("Base Movement")]
     public float horizontalForce;
@@ -66,12 +67,15 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
-        CheckIfGrounded();
-        if(!isAttacking)
-            Attack();
-        FollowSprite();
-        RegenerateEnergy();
+        if (!isDead)
+        {
+            Move();
+            CheckIfGrounded();
+            if (!isAttacking)
+                Attack();
+            FollowSprite();
+            RegenerateEnergy();
+        }
     }
 
     private void Move()
@@ -301,6 +305,12 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(temp);
             rigidbody.AddForce(temp, ForceMode2D.Impulse);
             animator.TakeDamage(true);
+
+            if(health <= 0)
+            {
+                animator.PlayDeath(true);
+                isDead = true;
+            }
         }
     }
 }
