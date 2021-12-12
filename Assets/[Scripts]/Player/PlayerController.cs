@@ -185,8 +185,8 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        float a = (Input.GetAxisRaw("Fire1"));
-        float h = (Input.GetAxisRaw("Fire2"));
+        float a = (Input.GetAxisRaw("Fire1") + ((UIControls.lightAttackButtonDown) ? 1.0f : 0.0f));
+        float h = (Input.GetAxisRaw("Fire2") + ((UIControls.heavyAttackButtonDown) ? 1.0f : 0.0f));
 
         if (a != 0 && energy > lightAttackEnergyCost)
         {
@@ -311,6 +311,15 @@ public class PlayerController : MonoBehaviour
                 animator.PlayDeath(true);
                 isDead = true;
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Trap"))
+        {
+
+            TakeDamage(5, Vector2.up);
         }
     }
 }

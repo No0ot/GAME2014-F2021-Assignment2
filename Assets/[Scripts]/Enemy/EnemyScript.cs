@@ -244,4 +244,22 @@ public class EnemyScript : MonoBehaviour
             if(startPosition.y - 0.5 > transform.position.y )
             rigidbody.AddForce(Vector2.up * runForce);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Trap"))
+        {
+
+            TakeDamage(5, Vector2.up);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+
+            TakeDamage(5, Vector2.up);
+        }
+    }
 }
