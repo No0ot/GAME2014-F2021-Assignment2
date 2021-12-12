@@ -87,7 +87,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
+  - time: 0.0625
     functionName: PlayJumpSound
     data: 
     objectReferenceParameter: {fileID: 0}

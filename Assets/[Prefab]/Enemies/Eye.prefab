@@ -131,7 +131,9 @@ GameObject:
   - component: {fileID: 956993329304817963}
   - component: {fileID: 8895002502669641774}
   - component: {fileID: 7706560671299816999}
-  m_Layer: 10
+  - component: {fileID: 648467056352511209}
+  - component: {fileID: 8933716993477539111}
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,6 +226,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &648467056352511209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450542239283291577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc64f38999ae144cafabc8da6d071fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  playerInAudioRange: 0
+--- !u!58 &8933716993477539111
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450542239283291577}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
 --- !u!1 &4683997617741358398
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +266,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4683997617741358399}
   - component: {fileID: 6385048441922332074}
-  - component: {fileID: -6201360247309531969}
   - component: {fileID: 7301001509707275127}
   - component: {fileID: 5001896768846003481}
   m_Layer: 10
@@ -309,19 +340,6 @@ MonoBehaviour:
   heartNum: 0
   type: 1
   startPosition: {x: 0, y: 0, z: 0}
---- !u!114 &-6201360247309531969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4683997617741358398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc64f38999ae144cafabc8da6d071fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
 --- !u!50 &7301001509707275127
 Rigidbody2D:
   serializedVersion: 4

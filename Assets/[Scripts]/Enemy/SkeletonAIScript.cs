@@ -7,6 +7,8 @@ public class SkeletonAIScript : MonoBehaviour
     public AIState state;
     EnemyScript controller;
 
+    public bool playerInAudioRange;
+
     float idleTimerMax = 2.0f;
     float idleTimer;
 
@@ -21,7 +23,7 @@ public class SkeletonAIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<EnemyScript>();
+        controller = GetComponentInParent<EnemyScript>();
         state = AIState.IDLE;
     }
 
@@ -94,14 +96,54 @@ public class SkeletonAIScript : MonoBehaviour
     private void Death()
     {
         controller.attackCollider.SetActive(false);
-        GetComponent<Collider2D>().enabled = false;
+        transform.parent.GetComponent<Collider2D>().enabled = false;
         if (deathTimer < deathTimerMax)
             deathTimer += Time.deltaTime;
         else
         {
-            transform.parent = EnemyManager.Instance.transform;
-            gameObject.SetActive(false);
+            transform.parent.transform.parent = EnemyManager.Instance.transform;
+            transform.parent.gameObject.SetActive(false);
             deathTimer = 0;
+        }
+    }
+
+    public void PlayWalkSound()
+    {
+        if(playerInAudioRange)
+            SoundManager.Instance.PlaySkeletonSound(0);
+    }
+
+    public void PlayAttackSound()
+    {
+        if (playerInAudioRange)
+            SoundManager.Instance.PlaySkeletonSound(1);
+    }
+
+    public void PlayHurtSound()
+    {
+        if (playerInAudioRange)
+            SoundManager.Instance.PlaySkeletonSound(2);
+    }
+
+    public void PlayDieSound()
+    {
+        if (playerInAudioRange)
+            SoundManager.Instance.PlaySkeletonSound(3);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            playerInAudioRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInAudioRange = false;
         }
     }
 }
