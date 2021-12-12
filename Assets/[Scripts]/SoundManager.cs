@@ -53,6 +53,13 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] eyeSounds;
     public AudioClip[] skeletonSounds;
 
+    //Effects Sounds
+    public AudioClip jarBreak;
+    public AudioClip chestOpen;
+    public AudioClip coinPickup;
+    public AudioClip heartPickup;
+
+
     //Mixer Group
     public AudioMixerGroup[] mixergroup;
 
@@ -115,6 +122,24 @@ public class SoundManager : MonoBehaviour
         temp.playOnAwake = false;
         temp.volume = 0.1f;
         playerAudioSourceList.Add(temp);
+        return temp;
+    }
+
+    public AudioSource GetEffectAudioSource()
+    {
+        foreach (AudioSource source in effectAudioSourceList)
+        {
+            if (!source.isPlaying)
+            {
+                return source;
+            }
+        }
+
+        AudioSource temp = transform.GetChild(2).gameObject.AddComponent<AudioSource>();
+        temp.outputAudioMixerGroup = mixergroup[5];
+        temp.playOnAwake = false;
+        temp.volume = 0.1f;
+        effectAudioSourceList.Add(temp);
         return temp;
     }
     public void PlayPlayerSound(PlayerSoundStates sound)
@@ -189,4 +214,28 @@ public class SoundManager : MonoBehaviour
         uiSoundSource.Play();
     }
 
+    public void PlayCoinPickup()
+    {
+        AudioSource temp = GetEffectAudioSource();
+        temp.clip = coinPickup;
+        temp.Play();
+    }
+    public void PlayHeartPickup()
+    {
+        AudioSource temp = GetEffectAudioSource();
+        temp.clip = heartPickup;
+        temp.Play();
+    }
+    public void PlayJarBreak()
+    {
+        AudioSource temp = GetEffectAudioSource();
+        temp.clip = jarBreak;
+        temp.Play();
+    }
+    public void PlayChestOpen()
+    {
+        AudioSource temp = GetEffectAudioSource();
+        temp.clip = chestOpen;
+        temp.Play();
+    }
 }

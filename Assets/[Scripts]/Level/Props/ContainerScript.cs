@@ -42,6 +42,7 @@ public class ContainerScript : MonoBehaviour
                 {
                     animator.SetTrigger("Open");
 
+                    SoundManager.Instance.PlayJarBreak();
                     opened = true;
                     LootManager.Instance.GenerateLoot(coinNum, gemNum, heartNum, transform.position);
                     Invoke("TurnOff", 0.4f);
@@ -52,7 +53,7 @@ public class ContainerScript : MonoBehaviour
                 if (collision.CompareTag("Player"))
                 {
                     animator.SetTrigger("Open");
-
+                    SoundManager.Instance.PlayChestOpen();
                     opened = true;
                     LootManager.Instance.GenerateLoot(coinNum, gemNum, heartNum, transform.position);
                 }

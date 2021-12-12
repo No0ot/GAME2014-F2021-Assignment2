@@ -40,14 +40,17 @@ public class LootScript : MonoBehaviour
             {
                 case LootType.COIN:
                     PlayerProgressionScript temp = collision.GetComponent<PlayerProgressionScript>();
+                    SoundManager.Instance.PlayCoinPickup();
                     temp.scoreNum += score;
                     break;
                 case LootType.GEM:
                     PlayerProgressionScript temp2 = collision.GetComponent<PlayerProgressionScript>();
+                    SoundManager.Instance.PlayCoinPickup();
                     temp2.scoreNum += score;
                     break;
                 case LootType.HEART:
                     PlayerController temp3 = collision.GetComponent<PlayerController>();
+                    SoundManager.Instance.PlayHeartPickup();
                     temp3.health += score;
                     if (temp3.health > temp3.maxHealth)
                         temp3.health = temp3.maxHealth;
