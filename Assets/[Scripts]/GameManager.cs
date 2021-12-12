@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
                 UIControls.SetActive(true);
                 break;
         }
+        SoundManager.Instance.PlayGameplayMusic();
     }
 
     // Update is called once per frame

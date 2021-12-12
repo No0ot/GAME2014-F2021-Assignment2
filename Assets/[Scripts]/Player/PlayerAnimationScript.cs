@@ -80,5 +80,27 @@ public class PlayerAnimationScript : MonoBehaviour
         animator.SetBool("TakeDamage", true);
     }
 
+    public void PlayRunSound()
+    {
+        SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.RUN);
+    }
+    public void PlayJumpSound()
+    {
+        SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.JUMP);
+    }
+    public void PlayAttackSound()
+    {
+        SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.LIGHTATTACK);
+    }
+
+    public void PlayHeavyAttackSound()
+    {
+        SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.HEAVYATTACK);
+    }
+
+    public void PlayLandingSound()
+    {
+        SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.LANDING);
+    }
 }
 

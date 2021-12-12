@@ -88,7 +88,9 @@ public class PlayerController : MonoBehaviour
         //animator.PassInInput(x, y);
         animator.PassInVelocity(Mathf.Abs(rigidbody.velocity.x), rigidbody.velocity.y);
         if (jump != 0)
+        {
             animator.IsJumping(true);
+        }
         else
             animator.IsJumping(false);
         if(wallSlide)
@@ -236,7 +238,11 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hitRight = Physics2D.Linecast(rightSide, rightSide - (Vector3.up * groundRadius), groundLayerMask);
 
         if (hitLeft || hitRight)
+        {
+            if(!isGrounded)
+                SoundManager.Instance.PlayPlayerSound(PlayerSoundStates.RUN);
             isGrounded = true;
+        }
         else
             isGrounded = false;
     }
