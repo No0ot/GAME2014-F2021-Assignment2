@@ -81,8 +81,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // Keyboard Input
-        float x = (Input.GetAxisRaw("Horizontal") + joystick.Horizontal);
-        float y = (Input.GetAxisRaw("Vertical") + joystick.Vertical);
+        float x = (Input.GetAxisRaw("Horizontal"));
+        float y = (Input.GetAxisRaw("Vertical"));
         float jump = 0;
         if (!isAttacking)
             jump = Input.GetAxisRaw("Jump") + ((UIControls.jumpButtonDown) ? 1.0f : 0.0f);

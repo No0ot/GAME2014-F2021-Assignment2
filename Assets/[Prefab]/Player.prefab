@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.077835, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8050548640033880999}
   - {fileID: 595284162064376918}
@@ -92,6 +93,7 @@ MonoBehaviour:
   maxEnergy: 100
   energy: 0
   energyRegenRate: 0
+  isDead: 0
   horizontalForce: 20
   jumpForce: 120
   isGrounded: 0
@@ -112,14 +114,15 @@ MonoBehaviour:
   lightAttackEnergyCost: 0
   heavyAttackEnergyCost: 0
   isAttacking: 0
-  groundLightAttackCollider: {fileID: 0}
-  groundHeavyAttackCollider: {fileID: 0}
-  airLightAttackCollider: {fileID: 0}
-  airHeavyAttackCollider: {fileID: 0}
+  canTakeDamage: 0
+  groundLightAttackCollider: {fileID: 7959694603621538996}
+  groundHeavyAttackCollider: {fileID: 6075594504596026785}
+  airLightAttackCollider: {fileID: 7983029518053816855}
+  airHeavyAttackCollider: {fileID: 6776797111178344693}
   groundOrigin: {fileID: 595284162064376918}
   wallOrigin: {fileID: 8050548640033880999}
   sprite: {fileID: 7797518780448826971}
-  animator: {fileID: 0}
+  animator: {fileID: 7927736196094528601}
 --- !u!114 &7749281615450276246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +165,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.098, y: 0.55, z: -0.14693591}
   m_LocalScale: {x: 1, y: 1.5750002, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4359983746973299680}
   m_RootOrder: 1
@@ -223,6 +227,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.38999987, y: 0.81, z: -0.14693591}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4359983746973299680}
   m_RootOrder: 3
@@ -285,6 +290,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4089170094216639447}
   - {fileID: 5333822299586205936}
@@ -348,7 +354,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &1707382742482733279
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -361,6 +367,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -406,6 +413,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.015, y: 0.9814995, z: -0.14693591}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4359983746973299680}
   m_RootOrder: 0
@@ -467,6 +475,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.32999992, y: 1.01, z: -0.14693591}
   m_LocalScale: {x: 1, y: 1.5750002, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4359983746973299680}
   m_RootOrder: 2
@@ -526,6 +535,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.422, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2208405091456985049}
   m_RootOrder: 1
@@ -558,6 +568,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.053, y: 0.714, z: -0.14693591}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4359983746973299680}
   m_RootOrder: 4
@@ -617,6 +628,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2208405091456985049}
   m_RootOrder: 0

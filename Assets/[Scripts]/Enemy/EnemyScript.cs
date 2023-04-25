@@ -215,13 +215,12 @@ public class EnemyScript : MonoBehaviour
             return false;
     }
 
-    public void TakeDamage(float damage, Vector2 attackdirection)
+    public void TakeDamage(float damage, Vector2 knockback)
     {
         if (canTakeDamage)
         {
             health -= damage;
-            Vector2 temp = new Vector2(-attackdirection.x * 10, 5);
-            rigidbody.AddForce(temp, ForceMode2D.Impulse);
+            rigidbody.AddForce(knockback, ForceMode2D.Impulse);
             animator.SetBool("TakeDamage", true);
             canTakeDamage = false;
             if (health <= 0)
